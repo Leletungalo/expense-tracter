@@ -14,7 +14,6 @@ const Balance = () => {
 		let tempExpense = 0;
 		transactions.forEach(element => {
 			const {newPrince} = element;
-			console.log(newPrince)
 			tempTotal += newPrince;
 			if(newPrince > 0){
 				tempIncome += newPrince;
@@ -33,7 +32,7 @@ const Balance = () => {
 			<Grid container spacing={3}>
 				<Grid item xs={12}>
 					<Typography variant="h5">YOUR BALANCE</Typography>
-					<Typography>{total}</Typography>
+					<Typography>R {" " +total}</Typography>
 				</Grid>
 				<Grid item xs={1} />
 				<Grid item xs={5}>

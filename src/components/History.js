@@ -14,11 +14,12 @@ const History = () => {
 			<div className={classes.container}>
 				{transactions && transactions.map(element => {
 					let positiveSign = null;
-					if (element.newPrince > +0) positiveSign = true;
+					if (element.newPrince > 0) positiveSign = true;
 					else positiveSign = false;
 					return (
 						<HistoryElement
 							key={element.id}
+							id={element.id}
 							title={element.title}
 							price={Math.abs(element.newPrince)}
 							positiveSign={positiveSign}
@@ -40,6 +41,7 @@ const useStyles = makeStyles({
 		padding: "1em",
 	},
 	container: {
+		width: "100%",
 		height: "30vh",
 		overflowY: "scroll",
 	},

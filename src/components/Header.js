@@ -16,6 +16,9 @@ const Header = () => {
 const useStyles = makeStyles({
 	root:{
 		padding:"1em 2em"
+	},
+	delete:{
+		display:"inline-block"
 	}
 })
 

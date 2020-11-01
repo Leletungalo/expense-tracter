@@ -6,7 +6,7 @@ import History from "./History";
 import AddTransactions from "./AddTransactions";
 
 import TransactionsContext from "../context/expenses-context/TransactionsContext"
-import UseFirestore from "../hooks/UseFirestore";
+import {UseFirestore} from "../hooks/UseFirestore";
 
 const Dashboard = () => {
 	const {docs} = UseFirestore("month1");
@@ -22,10 +22,10 @@ const Dashboard = () => {
 			<Grid container spacing={2} className={classes.wrap}>
 				<Grid item xs={1}  ></Grid>
 					<Grid container spacing={2} item xs={10}  >
-						<Grid item md={6}>
+						<Grid item xs={12} md={6}>
 							<Balance />
 						</Grid>
-						<Grid item md={6}>
+						<Grid item xs={12} md={6} >
 							<History />
 						</Grid>
 						<Grid item md={12}>

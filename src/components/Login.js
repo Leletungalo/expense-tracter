@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import AuthContext from "../context/auth/AuthContext";
 import {
 	Paper,
 	Typography,
@@ -7,39 +6,31 @@ import {
 	Toolbar,
 	makeStyles,
 } from "@material-ui/core";
+import {projectAuth} from "../firebase/config";
+import AuthContext from "../context/auth/AuthContext"
 import { Redirect } from "react-router-dom";
 
-const Register = () => {
-	const [valiedUser, setValiedUser] = useState("");
-	const { setToken } = useContext(AuthContext);
+const Login = () => {
+	const {setUser} = useContext(AuthContext);
+	const [isLoged, setIsiLoged] = useState(false);
+
 	const haddleSubmit = async event => {
 		event.preventDefault();
-		const name = event.target["name"].value;
 		const email = event.target["email"].value;
 		const password = event.target["password"].value;
-
-		const data = {
-			name,
-			email,
-			password,
-		};
 		try {
-			const res = await fetch("http://localhost:4001/api/auth/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-			});
-			const tojson = await res.json();
-			setToken(tojson.token);
-			setValiedUser("ewe");
+			if(email !== "" && password !== ""){
+				const user = await projectAuth.signInWithEmailAndPassword(email,password);
+				console.log(user.user);
+				setUser(user.user);
+				setIsiLoged(true);
+			}
 		} catch (error) {
-			console.error("token error", error);
+			console.log(error);
 		}
-	};
+	}
 	const classes = useStyles();
-	if (valiedUser === "ewe") return <Redirect to="/icons" />;
+	if (isLoged) return <Redirect to="/dashboard" />;
 	return (
 		<Paper className={classes.Paper}>
 			<Paper className={classes.header}>
@@ -93,4 +84,4 @@ const useStyles = makeStyles({
 	},
 });
 
-export default Register;
+export default Login;

@@ -1,10 +1,10 @@
-import { SET_TOKEN } from "../Types";
+import { SET_USER } from "../Types";
 export default (state, action) => {
 	const { type, payload } = action;
 	switch (type) {
-		case SET_TOKEN:
+		case SET_USER:
 			return {
-				token: payload,
+				user: payload,
 			};
 
 		default:

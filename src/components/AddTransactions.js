@@ -15,7 +15,6 @@ const AddTransactions = () => {
 				newPrince *= -1;
 			}
 			try{
-				console.log(title,newPrince);
 				const createdAt = timestamp();
 				// eslint-disable-next-line
 				const added = await projectDatabese.collection("month1")
@@ -77,8 +76,7 @@ const useStayles = makeStyles({
 	checkwrap:{
 		display: "flex",
 		alignItems: "center",
-		justifyContent: "flex-end",
-		marginLeft: "auto"
+		justifyContent: "center",
 	},
 	inputs:{
 		margin:"1em"

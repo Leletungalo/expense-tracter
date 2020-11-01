@@ -1,3 +1,4 @@
-export const SET_TOKEN = "SET_TOKEN";
+export const SET_USER = "SET_USER";
+
 export const ADD_TRANSACTION = "ADD_TRANSACTION";
 export const GET_TRANSACTIONS = "GET_TRANSACTIONS";

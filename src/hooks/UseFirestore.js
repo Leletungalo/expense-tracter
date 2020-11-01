@@ -2,8 +2,7 @@ import {useEffect,useState} from "react";
 import {projectDatabese} from "../firebase/config"
 
 const UseFirestore = collections => {
-    const [docs, setDocs] = useState([])
-
+    const [docs, setDocs] = useState([]);
     useEffect(() => {
         projectDatabese.collection(collections)
             .orderBy("createdAt","desc")
@@ -17,5 +16,4 @@ const UseFirestore = collections => {
     },[collections])
     return {docs};
 }
-
-export default UseFirestore;
+export {UseFirestore};

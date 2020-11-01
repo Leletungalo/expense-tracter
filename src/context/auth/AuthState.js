@@ -1,24 +1,25 @@
 import React, { useReducer } from "react";
 import AuthContext from "./AuthContext";
 import AuthReducer from "./AuthReducer";
-import { SET_TOKEN } from "../Types";
+import { SET_USER } from "../Types";
 
 const AuthState = props => {
 	const incialState = {
-		token: null,
+		user: null,
 	};
 
 	const [state, dispatch] = useReducer(AuthReducer, incialState);
-	const setToken = token =>
-		dispatch({
-			type: SET_TOKEN,
-			payload: token,
-		});
+	const setUser = user => dispatch({
+		type: SET_USER,
+		payload: user
+	})
+
+
 	return (
 		<AuthContext.Provider
 			value={{
-				token: state.token,
-				setToken,
+				user: state.user,
+				setUser
 			}}
 		>
 			{props.children}

@@ -1,11 +1,25 @@
 import React from "react";
-import { makeStyles, Typography, Paper } from "@material-ui/core";
-
-const HistoryElement = ({ title, price, positiveSign }) => {
+import { makeStyles, Typography, Paper, IconButton } from "@material-ui/core";
+import {DeleteOutlineOutlined} from "@material-ui/icons";
+import {projectDatabese} from "../firebase/config"
+const HistoryElement = ({id, title, price, positiveSign }) => {
 	const classes = useStyles(positiveSign);
-
+	const onDelete = () => {
+		try {
+			projectDatabese.collection("month1")
+            .doc(id)
+            .delete();
+            console.log("document succefully deleted");
+        } catch (error) {
+            console.error(error)
+        }
+	}
+	
 	return (
 		<Paper className={classes.wrap}>
+			<IconButton onClick={onDelete}>
+				<DeleteOutlineOutlined />
+			</IconButton>
 			<Typography variant="h5">{title}</Typography>
 			<Typography className={classes.price}>R {price}</Typography>
 		</Paper>
@@ -14,6 +28,7 @@ const HistoryElement = ({ title, price, positiveSign }) => {
 
 const useStyles = makeStyles({
 	wrap: {
+		width: "100%",
 		position:"relative",
 		display: "flex",
 		alignItems: "center",
