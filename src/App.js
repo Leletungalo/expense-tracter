@@ -7,13 +7,11 @@ import Dashboard from "./components/Dashboard";
 import Home from "./components/Home"
 import AuthState from "./context/auth/AuthState";
 import TransactionsState from "./context/expenses-context/TransactionsState";
-import Header from "./components/Header";
 
 function App() {
 	return (
 		<AuthState>
 			<TransactionsState>
-				<Header />
 				<Router>
 					<Switch>
 						<Route exact path="/" >

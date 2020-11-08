@@ -5,19 +5,20 @@ import {
 	TextField,
 	Toolbar,
 	makeStyles,
+	Button
 } from "@material-ui/core";
 import {projectAuth} from "../firebase/config";
 import AuthContext from "../context/auth/AuthContext"
 import { Redirect } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setRegister}) => {
 	const {setUser} = useContext(AuthContext);
 	const [isLoged, setIsiLoged] = useState(false);
 
 	const haddleSubmit = async event => {
-		event.preventDefault();
-		const email = event.target["email"].value;
-		const password = event.target["password"].value;
+		const form = document.querySelector("form");
+		const email = form["email"].value;
+		const password = form["password"].value;
 		try {
 			if(email !== "" && password !== ""){
 				const user = await projectAuth.signInWithEmailAndPassword(email,password);
@@ -38,7 +39,7 @@ const Login = () => {
 					<Typography variant="h4">Log in</Typography>
 				</Toolbar>
 			</Paper>
-			<form onSubmit={haddleSubmit} className={classes.myForm}>
+			<form className={classes.myForm}>
 				<TextField
 					name="email"
 					className={classes.input}
@@ -49,7 +50,17 @@ const Login = () => {
 					className={classes.input}
 					label="password"
 				/>
-				<TextField className={classes.submit} type="submit" />
+					<Button 
+						variant="contained" 
+						color="primary" 
+						onClick={haddleSubmit}
+						className={classes.submit} >Submit</Button>
+					<Button 
+						variant="contained" 
+						color="secondary" 
+						onClick={() => setRegister(true)}
+						className={classes.register}>register</Button>
+				
 			</form>
 		</Paper>
 	);
@@ -76,12 +87,15 @@ const useStyles = makeStyles({
 		margin: "1.2em",
 	},
 	submit: {
-		width: "80%",
 		borderRadius: "10px",
-		backgroundColor: "#00bfff",
+		outline: "none",
+		padding:".5em 1em"
+	},
+	register:{
 		border: "none",
 		outline: "none",
-	},
+		margin: "0 2em"
+	}
 });
 
 export default Login;

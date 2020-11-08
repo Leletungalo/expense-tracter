@@ -4,6 +4,7 @@ import { makeStyles,Grid } from "@material-ui/core";
 import Balance from "./Balance";
 import History from "./History";
 import AddTransactions from "./AddTransactions";
+import Header from "./Header";
 
 import TransactionsContext from "../context/expenses-context/TransactionsContext"
 import {UseFirestore} from "../hooks/UseFirestore";
@@ -19,6 +20,7 @@ const Dashboard = () => {
 	const classes = useStyles();
 	return (
 		<>
+			<Header />
 			<Grid container spacing={2} className={classes.wrap}>
 				<Grid item xs={1}  ></Grid>
 					<Grid container spacing={2} item xs={10}  >
