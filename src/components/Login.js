@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
 	Paper,
 	Typography,
@@ -7,31 +7,20 @@ import {
 	makeStyles,
 	Button
 } from "@material-ui/core";
-import {projectAuth} from "../firebase/config";
-import AuthContext from "../context/auth/AuthContext"
-import { Redirect } from "react-router-dom";
+import AuthContext from "../context/auth/AuthContext";
 
 const Login = ({setRegister}) => {
-	const {setUser} = useContext(AuthContext);
-	const [isLoged, setIsiLoged] = useState(false);
+	const {login} = useContext(AuthContext);
 
-	const haddleSubmit = async event => {
+	const haddleSubmit = () => {
 		const form = document.querySelector("form");
 		const email = form["email"].value;
 		const password = form["password"].value;
-		try {
-			if(email !== "" && password !== ""){
-				const user = await projectAuth.signInWithEmailAndPassword(email,password);
-				console.log(user.user);
-				setUser(user.user);
-				setIsiLoged(true);
-			}
-		} catch (error) {
-			console.log(error);
+		if(email !== "" && password !== ""){
+			login(email,password);
 		}
 	}
 	const classes = useStyles();
-	if (isLoged) return <Redirect to="/dashboard" />;
 	return (
 		<Paper className={classes.Paper}>
 			<Paper className={classes.header}>
@@ -58,8 +47,10 @@ const Login = ({setRegister}) => {
 					<Button 
 						variant="contained" 
 						color="secondary" 
-						onClick={() => setRegister(true)}
-						className={classes.register}>register</Button>
+						onClick={() => setRegister(false)}
+						className={classes.register}>
+							register
+					</Button>
 				
 			</form>
 		</Paper>

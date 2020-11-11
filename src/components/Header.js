@@ -1,14 +1,11 @@
-import React,{useState} from "react";
+import React,{useContext} from "react";
 import { AppBar, Typography, makeStyles, Toolbar, IconButton } from "@material-ui/core";
-import {projectAuth} from "../firebase/config";
-import {Redirect} from "react-router-dom"
+import AuthContext from "../context/auth/AuthContext"
 
 const Header = () => {
+	const {signOut} = useContext(AuthContext);
 	const classes = useStyles();
-	const [signedOut,setSignedOut] = useState(false);
-	if(signedOut)
-		return (<Redirect to="/" />);
-	else
+	
 	return (
 		<AppBar  
 			className={classes.root}
@@ -19,8 +16,7 @@ const Header = () => {
 			<IconButton 
 				className={classes.login}
 				onClick={() => {
-					projectAuth.signOut();
-					setSignedOut(true);
+					signOut()
 				}}
 				>
 				<Typography  variant="h6">Log out</Typography>

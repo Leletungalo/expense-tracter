@@ -1,4 +1,4 @@
-import React, {useState,useContext}  from "react";
+import React, {useContext}  from "react";
 import AuthContext from "../context/auth/AuthContext";
 import {
 	Paper,
@@ -7,31 +7,19 @@ import {
 	Toolbar,
 	makeStyles,
 } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
-import {projectAuth} from "../firebase/config"
-const Register = () => {
-	const {setUser} = useContext(AuthContext);
 
-	const [isRegistered, setIsiRegisted] = useState(false);
+const Register = () => {
+	const {signUp} = useContext(AuthContext);
 	const haddleSubmit = async event => {
 		event.preventDefault();
 		const name = event.target["name"].value;
 		const email = event.target["email"].value;
 		const password = event.target["password"].value;
-		try {
-			if(email !== "" && password !== ""){
-				console.log(name, email, password)
-				const user = await projectAuth.createUserWithEmailAndPassword(email,password)
-				console.log(user);
-				setUser(user.user);
-				setIsiRegisted(true);
-			}
-		} catch (error) {
-			console.log(error)
+		if(email !== "" && password !== ""){
+			signUp(email,password,name);
 		}
 	}
 	const classes = useStyles();
-	if (isRegistered) return <Redirect to="/dashboard" />;
 	return (
 		<Paper className={classes.Paper}>
 			<Paper className={classes.header}>
