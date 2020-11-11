@@ -39,6 +39,7 @@ const Login = ({setRegister}) => {
 					className={classes.input}
 					label="password"
 				/>
+				<div>
 					<Button 
 						variant="contained" 
 						color="primary" 
@@ -51,7 +52,7 @@ const Login = ({setRegister}) => {
 						className={classes.register}>
 							register
 					</Button>
-				
+				</div>
 			</form>
 		</Paper>
 	);
