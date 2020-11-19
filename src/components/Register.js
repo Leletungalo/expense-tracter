@@ -1,4 +1,4 @@
-import React, {useContext}  from "react";
+import React, { useContext } from "react";
 import AuthContext from "../context/auth/AuthContext";
 import {
 	Paper,
@@ -6,19 +6,20 @@ import {
 	TextField,
 	Toolbar,
 	makeStyles,
+	Button,
 } from "@material-ui/core";
 
-const Register = () => {
-	const {signUp} = useContext(AuthContext);
+const Register = ({ setRegister }) => {
+	const { signUp } = useContext(AuthContext);
 	const haddleSubmit = async event => {
 		event.preventDefault();
 		const name = event.target["name"].value;
 		const email = event.target["email"].value;
 		const password = event.target["password"].value;
-		if(email !== "" && password !== ""){
-			signUp(email,password,name);
+		if (email !== "" && password !== "") {
+			signUp(email, password, name);
 		}
-	}
+	};
 	const classes = useStyles();
 	return (
 		<Paper className={classes.Paper}>
@@ -39,7 +40,16 @@ const Register = () => {
 					className={classes.input}
 					label="password"
 				/>
-				<TextField className={classes.submit} type="submit" />
+				<di>
+					<TextField className={classes.submit} type="submit" />
+					<Button
+						variant="contained"
+						color="secondary"
+						onClick={() => setRegister(true)}
+					>
+						Already have Account
+					</Button>
+				</di>
 			</form>
 		</Paper>
 	);
@@ -66,11 +76,12 @@ const useStyles = makeStyles({
 		margin: "1.2em",
 	},
 	submit: {
-		width: "80%",
+		width: "40%",
 		borderRadius: "10px",
 		backgroundColor: "#00bfff",
 		border: "none",
 		outline: "none",
+		margin: " 0 1em",
 	},
 });
 

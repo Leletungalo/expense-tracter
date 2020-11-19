@@ -6,11 +6,14 @@ import History from "./History";
 import AddTransactions from "./AddTransactions";
 
 import TransactionsContext from "../context/expenses-context/TransactionsContext"
+import AuthContext from "../context/auth/AuthContext"
 import {UseFirestore} from "../hooks/UseFirestore";
 
 const Dashboard = () => {
-	const {docs} = UseFirestore("month1");
+	
 	const {getTransactions} = useContext(TransactionsContext);
+	const {user} = useContext(AuthContext);
+	const {docs} = UseFirestore(user.email);
 	useEffect(() => {
 		getTransactions(docs);
 		// eslint-disable-next-line
